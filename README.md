@@ -1,7 +1,7 @@
 # Hotel Reservation Frontend
 
 This is the frontend for the hotel reservation system. It is built using React and Tailwind CSS.
-Backend API repo -> [github.com/jucaza1/hotel-reserv/](github.com/jucaza1/hotel-reserv/)
+Backend API repo -> https://github.com/jucaza1/hotel-reserv
 
 ## Installation
 1. Clone the repository
