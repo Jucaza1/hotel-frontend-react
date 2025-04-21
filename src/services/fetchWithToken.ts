@@ -7,8 +7,9 @@ export default function fetchWT(
     method: string,
     headers?: { [key: string]: string },
     body?: string) {
+    // console.log(getToken())
 
-    return fetch(`${backendUrl}/v1/${url}`, {
+    return fetch(`${backendUrl}/v1${url}`, {
         method: method,
         headers: {
             'x-authorization': getToken() as string,

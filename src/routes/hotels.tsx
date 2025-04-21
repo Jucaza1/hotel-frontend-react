@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react'
 import fetchWT from '../services/fetchWithToken'
 import { Hotel } from '../types/hotel'
-import { HotelCard } from '../components/hotelCard'
+import { HotelCard } from '../components/HotelCard'
+import { useNavigate } from 'react-router'
 
 export default function Hotels() {
     const [hotels, setHotels] = useState([] as Hotel[])
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchHotels = async () => {
-            const response = await fetchWT('hotels', 'GET')
+            const response = await fetchWT('/hotels', 'GET')
+            if (response.status == 401) {
+                navigate("/login")
+            }
             const data = await response.json() as Hotel[]
             setHotels(data)
         }

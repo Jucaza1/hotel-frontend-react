@@ -1,24 +1,21 @@
-//lets create a page for displayin the user info from an endpoint using the JWT token from the context
-
 import { useContext, useEffect, useState } from 'react'
 import { userContext } from '../context/user'
 import { User } from '../types/user'
-import { getToken } from '../services/session'
 import fetchWT from '../services/fetchWithToken'
+import { useNavigate } from 'react-router'
 
 
 export default function UserProfile() {
     const { userJWT, setUserJWT } = useContext(userContext)
     const [user, setUser] = useState({} as User)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        let uJWT = userJWT
-        if (!uJWT) {
-            uJWT = getToken() as string
-            setUserJWT(uJWT)
-        }
         const fetchUser = async () => {
-            const response = await fetchWT(`users`, 'GET')
+            const response = await fetchWT(`/users`, 'GET')
+            if (response.status == 401){
+                navigate("/login")
+            }
             const data = await response.json() as User
             setUser(data)
         }
